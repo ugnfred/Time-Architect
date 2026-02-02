@@ -6,15 +6,22 @@ const zones = {
   JST: "Asia/Tokyo"
 };
 
-function getZoneFromURL() {
-  const path = window.location.pathname.split("/").pop().toUpperCase();
-  return zones[path] ? path : "EST";
+/* -------------------------
+   ROUTING (HASH-BASED)
+-------------------------- */
+function getZoneFromHash() {
+  const hash = window.location.hash.replace("#", "").toUpperCase();
+  return zones[hash] ? hash : "EST";
 }
 
-let currentZone = getZoneFromURL();
+let currentZone = getZoneFromHash();
 
+/* -------------------------
+   TIME UPDATE
+-------------------------- */
 function updateTime() {
   const now = new Date();
+
   document.getElementById("clock").innerText =
     now.toLocaleTimeString("en-US", {
       timeZone: zones[currentZone],
@@ -23,8 +30,13 @@ function updateTime() {
 
   document.getElementById("zoneTitle").innerText =
     `Current Time in ${currentZone}`;
+
+  document.title = `Current Time in ${currentZone} | Time Architect`;
 }
 
+/* -------------------------
+   WORLD CLOCK (CLICKABLE)
+-------------------------- */
 function updateWorld() {
   const now = new Date();
   const el = document.getElementById("world");
@@ -36,15 +48,54 @@ function updateWorld() {
       hour12: false
     });
 
-    el.innerHTML += `<div><strong>${z}</strong><br>${t}</div>`;
+    el.innerHTML += `
+      <div style="cursor:pointer"
+           onclick="changeZone('${z}')">
+        <strong>${z}</strong><br>${t}
+      </div>
+    `;
   }
 }
 
-function toggleTheme() {
-  document.documentElement.classList.toggle("dark");
+function changeZone(zone) {
+  currentZone = zone;
+  window.location.hash = zone;
+  updateTime();
 }
 
+/* -------------------------
+   DARK MODE (PERSISTENT)
+-------------------------- */
+function toggleTheme() {
+  document.documentElement.classList.toggle("dark");
+  localStorage.setItem(
+    "theme",
+    document.documentElement.classList.contains("dark") ? "dark" : "light"
+  );
+}
+
+(function loadTheme() {
+  const saved = localStorage.getItem("theme");
+  if (saved === "dark") {
+    document.documentElement.classList.add("dark");
+  }
+})();
+
+/* -------------------------
+   LISTEN FOR URL CHANGES
+-------------------------- */
+window.addEventListener("hashchange", () => {
+  currentZone = getZoneFromHash();
+  updateTime();
+});
+
+/* -------------------------
+   INIT LOOP
+-------------------------- */
 setInterval(() => {
   updateTime();
   updateWorld();
 }, 1000);
+
+updateTime();
+updateWorld();
