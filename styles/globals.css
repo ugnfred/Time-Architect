@@ -12,3 +12,15 @@ body {
   background: var(--bg);
   color: var(--text);
 }
+
+export default function ThemeToggle() {
+  return (
+    <button
+      onClick={() => document.documentElement.classList.toggle("dark")}
+    >
+      🌗 Toggle Theme
+    </button>
+  );
+}
+
+
