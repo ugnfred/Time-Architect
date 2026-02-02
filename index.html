@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Time Architect – World Clock</title>
+
+  <meta name="description"
+    content="Current time in EST, IST, GMT. World clock, dark mode, business hours overlap." />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Analytics (replace later) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TEST123"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TEST123');
+  </script>
+</head>
+
+<body>
+  <header>
+    <h1>🕒 Time Architect</h1>
+    <button onclick="toggleTheme()">🌗</button>
+  </header>
+
+  <main>
+    <h2 id="zoneTitle">Current Time</h2>
+    <div id="clock">--:--:--</div>
+
+    <section>
+      <h3>🌍 World Clock</h3>
+      <div id="world"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
