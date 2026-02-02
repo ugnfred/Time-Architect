@@ -1,0 +1,8 @@
+{
+  "name": "Time Architect",
+  "short_name": "TimeArchitect",
+  "start_url": "/Time-Architect/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
