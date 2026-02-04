@@ -188,8 +188,11 @@ updateWorld();
 /* -------------------------
    ALARM FEATURE
 -------------------------- */
-let alarmTime = localStorage.getItem("alarmTime");
 
+let alarmTime = localStorage.getItem("alarmTime");
+let alarmTriggered = false;
+
+/* Set alarm time */
 function setAlarm() {
   const input = document.getElementById("alarmTime").value;
 
@@ -199,43 +202,51 @@ function setAlarm() {
   }
 
   alarmTime = input;
+  alarmTriggered = false;
+
   localStorage.setItem("alarmTime", alarmTime);
 
   document.getElementById("alarmStatus").innerText =
     `Alarm set for ${alarmTime} (${currentZone})`;
 }
 
+/* Check alarm every second */
 function checkAlarm() {
-  if (!alarmTime) return;
+  if (!alarmTime || alarmTriggered) return;
 
   const now = new Date();
-  const timeNow = now.toLocaleTimeString("en-US", {
-  timeZone: zones[currentZone].tz,
-  hour12: false
-}).slice(0, 5);
- 
+  const timeNow = now
+    .toLocaleTimeString("en-US", {
+      timeZone: zones[currentZone].tz,
+      hour12: false
+    })
+    .slice(0, 5);
 
-   let alarmTriggered = false;
-
-     if (timeNow === alarmTime && !alarmTriggered) {
-     alarmTriggered = true;
-     playAlarm();
-     alert("⏰ Alarm!");
-     localStorage.removeItem("alarmTime");
-     alarmTime = null;
-     document.getElementById("alarmStatus").innerText = "";
+  if (timeNow === alarmTime) {
+    alarmTriggered = true;
+    playAlarm();
+    alert("⏰ Alarm!");
+    localStorage.removeItem("alarmTime");
+    alarmTime = null;
+    document.getElementById("alarmStatus").innerText = "";
+  }
 }
 
-   function setAlarmSound(key) {
+/* -------------------------
+   ALARM SOUND SELECTION
+-------------------------- */
+
+/* Save selected alarm sound */
+function setAlarmSound(key) {
   localStorage.setItem("alarmSound", key);
 }
 
-   (function loadAlarmSound() {
+/* Load saved sound on startup */
+(function loadAlarmSound() {
   const saved = localStorage.getItem("alarmSound") || "alarm1";
   const select = document.getElementById("alarmSoundSelect");
   if (select) select.value = saved;
 })();
-}
 
 
 /* -------------------------
