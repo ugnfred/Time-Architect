@@ -192,3 +192,37 @@ body {
   background: rgba(255, 255, 255, 0.08);
   opacity: 0.8;
 }
+
+/* =====================
+   TYPOGRAPHY
+===================== */
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+header h1 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+#zoneTitle {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+#clock {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+}
+
+#world strong {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+small {
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
