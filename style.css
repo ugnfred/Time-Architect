@@ -172,3 +172,23 @@ body {
   font-size: 1.4rem;
   cursor: pointer;
 }
+
+/* =====================
+   ADS
+===================== */
+
+.ad-box {
+  margin: 3rem auto 1rem;
+  max-width: 600px;
+  padding: 1rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.ad-placeholder {
+  margin-top: 0.5rem;
+  padding: 1.5rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  opacity: 0.8;
+}
