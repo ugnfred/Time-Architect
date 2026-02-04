@@ -15,32 +15,36 @@ function disablePro() {
   location.reload();
 }
 
-
 const zones = {
   EST: {
     tz: "America/New_York",
-    label: "Eastern Standard Time",
-    location: "New York, USA"
+    label: "Eastern Time",
+    location: "New York, USA",
+    observesDST: true
   },
   IST: {
     tz: "Asia/Kolkata",
     label: "India Standard Time",
-    location: "India"
+    location: "India",
+    observesDST: false
   },
   GMT: {
     tz: "Europe/London",
     label: "Greenwich Mean Time",
-    location: "London, UK"
+    location: "United Kingdom",
+    observesDST: true
   },
   PST: {
     tz: "America/Los_Angeles",
-    label: "Pacific Standard Time",
-    location: "California, USA"
+    label: "Pacific Time",
+    location: "California, USA",
+    observesDST: true
   },
   JST: {
     tz: "Asia/Tokyo",
     label: "Japan Standard Time",
-    location: "Tokyo, Japan"
+    location: "Tokyo, Japan",
+    observesDST: false
   }
 };
 
