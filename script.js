@@ -267,3 +267,56 @@ function setTheme(theme) {
   }
 })();
 
+/* -------------------------
+   Backgrounds
+-------------------------- */
+const backgrounds = {
+  bg1: "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
+  bg2: "https://images.unsplash.com/photo-1499346030926-9a72daac6c63",
+  bg3: "https://images.unsplash.com/photo-1526401485004-2aa7f3fca1c3"
+};
+
+function setBackground(key) {
+  if (key === "none") {
+    document.body.style.backgroundImage = "";
+    localStorage.removeItem("bg");
+    return;
+  }
+
+  if (key === "random") {
+    const keys = Object.keys(backgrounds);
+    key = keys[Math.floor(Math.random() * keys.length)];
+  }
+
+  document.body.style.backgroundImage = `url(${backgrounds[key]})`;
+  document.body.style.backgroundSize = "cover";
+  document.body.style.backgroundPosition = "center";
+  localStorage.setItem("bg", key);
+}
+
+function uploadBackground(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    document.body.style.backgroundImage = `url(${reader.result})`;
+    localStorage.setItem("bgCustom", reader.result);
+  };
+  reader.readAsDataURL(file);
+}
+
+(function loadBackground() {
+  const custom = localStorage.getItem("bgCustom");
+  if (custom) {
+    document.body.style.backgroundImage = `url(${custom})`;
+    return;
+  }
+
+  const bg = localStorage.getItem("bg");
+  if (bg && backgrounds[bg]) {
+    setBackground(bg);
+  }
+})();
+
+
