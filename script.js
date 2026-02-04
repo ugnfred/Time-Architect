@@ -1,3 +1,21 @@
+/* -------------------------
+   PRO MODE
+-------------------------- */
+function isPro() {
+  return localStorage.getItem("pro") === "true";
+}
+
+function enablePro() {
+  localStorage.setItem("pro", "true");
+  location.reload();
+}
+
+function disablePro() {
+  localStorage.removeItem("pro");
+  location.reload();
+}
+
+
 const zones = {
   EST: {
     tz: "America/New_York",
@@ -164,6 +182,13 @@ const themes = [
 ];
 
 function setTheme(theme) {
+  if (theme === "theme-graphite" && !isPro()) {
+    alert("🧠 Graphite is a Pro theme. Upgrade to unlock.");
+    document.getElementById("themeSelector").value =
+      localStorage.getItem("theme") || "theme-light";
+    return;
+  }
+
   document.documentElement.classList.remove(...themes);
   document.documentElement.classList.add(theme);
   localStorage.setItem("theme", theme);
