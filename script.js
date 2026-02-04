@@ -319,4 +319,20 @@ function uploadBackground(event) {
   }
 })();
 
+const alarmSounds = {
+  alarm1: "https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg",
+  alarm2: "https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg",
+  alarm3: "https://actions.google.com/sounds/v1/alarms/beep_short.ogg"
+};
+
+function playAlarm() {
+  const key = localStorage.getItem("alarmSound") || "alarm1";
+  const audio = document.getElementById("alarmSound");
+  if (!audio) {
+    console.error("Alarm audio element not found");
+    return;
+  }
+  audio.src = alarmSounds[key];
+  audio.play();
+}
 
