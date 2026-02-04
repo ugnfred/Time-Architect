@@ -64,24 +64,6 @@ function changeZone(zone) {
 }
 
 /* -------------------------
-   DARK MODE (PERSISTENT)
--------------------------- */
-function toggleTheme() {
-  document.documentElement.classList.toggle("dark");
-  localStorage.setItem(
-    "theme",
-    document.documentElement.classList.contains("dark") ? "dark" : "light"
-  );
-}
-
-(function loadTheme() {
-  const saved = localStorage.getItem("theme");
-  if (saved === "dark") {
-    document.documentElement.classList.add("dark");
-  }
-})();
-
-/* -------------------------
    LISTEN FOR URL CHANGES
 -------------------------- */
 window.addEventListener("hashchange", () => {
@@ -138,3 +120,29 @@ function checkAlarm() {
     document.getElementById("alarmStatus").innerText = "";
   }
 }
+
+/* -------------------------
+   THEME SYSTEM (5 THEMES)
+-------------------------- */
+
+const themes = [
+  "theme-light",
+  "theme-dark",
+  "theme-midnight",
+  "theme-solar",
+  "theme-graphite"
+];
+
+function setTheme(theme) {
+  document.body.classList.remove(...themes);
+  document.body.classList.add(theme);
+  localStorage.setItem("theme", theme);
+
+  const selector = document.getElementById("themeSelector");
+  if (selector) selector.value = theme;
+}
+
+(function loadTheme() {
+  const savedTheme = localStorage.getItem("theme") || "theme-light";
+  setTheme(savedTheme);
+})();
