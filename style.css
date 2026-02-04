@@ -33,3 +33,44 @@ header {
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 1rem;
 }
+
+/* =====================
+   THEMES
+===================== */
+
+.theme-light {
+  --bg: #ffffff;
+  --text: #000000;
+}
+
+.theme-dark {
+  --bg: #0f172a;
+  --text: #e5e7eb;
+}
+
+.theme-midnight {
+  --bg: #020617;
+  --text: #cbd5f5;
+}
+
+.theme-solar {
+  --bg: #fff7ed;
+  --text: #7c2d12;
+}
+
+.theme-graphite {
+  --bg: #1f2933;
+  --text: #d1d5db;
+}
+
+/* Apply variables */
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Theme-aware icon */
+.theme-toggle {
+  font-size: 1.4rem;
+  cursor: pointer;
+}
