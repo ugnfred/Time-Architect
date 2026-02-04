@@ -260,3 +260,14 @@ small {
   font-size: 0.85rem;
   opacity: 0.75;
 }
+
+#customizeSection {
+  margin-top: 3rem;
+  opacity: 0.9;
+}
+
+#customizeSection label {
+  display: block;
+  margin: 0.8rem 0;
+  font-size: 0.85rem;
+}
