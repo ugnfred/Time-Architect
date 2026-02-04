@@ -51,6 +51,15 @@
       <div id="world"></div>
     </section>
 
+    <section id="adSection">
+      <div class="ad-box">
+        <small>Advertisement</small>
+        <div class="ad-placeholder">
+          Your ad goes here
+        </div>
+      </div>
+    </section>
+    
     <section>
       <h3>🔔 Alarm</h3>
 
@@ -69,3 +78,14 @@
 
 </body>
 </html>
+
+/* -------------------------
+   ADS VISIBILITY
+-------------------------- */
+(function handleAds() {
+  if (isPro()) {
+    const ad = document.getElementById("adSection");
+    if (ad) ad.style.display = "none";
+  }
+})();
+
