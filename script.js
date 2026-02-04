@@ -201,3 +201,15 @@ function setTheme(theme) {
   const savedTheme = localStorage.getItem("theme") || "theme-light";
   setTheme(savedTheme);
 })();
+
+
+/* -------------------------
+   ADS VISIBILITY
+-------------------------- */
+(function handleAds() {
+  if (isPro()) {
+    const ad = document.getElementById("adSection");
+    if (ad) ad.style.display = "none";
+  }
+})();
+
