@@ -271,3 +271,25 @@ small {
   margin: 0.8rem 0;
   font-size: 0.85rem;
 }
+
+/* =====================
+   Settings
+===================== */
+
+#settings {
+  margin-top: 3rem;
+  max-width: 520px;
+  margin-inline: auto;
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.setting-group {
+  margin-top: 1.5rem;
+}
+
+.setting-group h4 {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
