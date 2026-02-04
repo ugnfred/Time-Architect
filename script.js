@@ -71,17 +71,7 @@ function updateTime() {
       hour12: false
     });
 
-  document.getElementById("zoneTitle").innerText =
-    `Current Time in ${currentZone}`;
-
-  document.getElementById("zoneInfo").innerText =
-  `${zones[currentZone].label} — ${zones[currentZone].location}`;
-
-  document.title = `Current Time in ${currentZone} | Time Architect`;
-
-   const now = new Date();
-
-document.getElementById("dateInfo").innerText =
+  document.getElementById("dateInfo").innerText =
   now.toLocaleDateString("en-US", {
     timeZone: zones[currentZone].tz,
     weekday: "long",
@@ -89,14 +79,20 @@ document.getElementById("dateInfo").innerText =
     month: "long",
     day: "numeric"
   });
+   
+  document.getElementById("zoneTitle").innerText =
+    `Current Time in ${currentZone}`;
 
-document.getElementById("zoneInfo").innerText =
+   document.getElementById("zoneInfo").innerText =
   `${zones[currentZone].label} — ${zones[currentZone].location} (${getUTCOffset(zones[currentZone].tz)})`;
 
-document.getElementById("dstInfo").innerText =
+   document.getElementById("dstInfo").innerText =
   zones[currentZone].observesDST
     ? "Daylight Saving Time observed"
     : "No Daylight Saving Time";
+
+  document.title = `Current Time in ${currentZone} | Time Architect`;
+
 }
 
 /* -------------------------
