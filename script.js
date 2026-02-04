@@ -215,14 +215,28 @@ function checkAlarm() {
 }).slice(0, 5);
  
 
-  if (timeNow === alarmTime) {
-    document.getElementById("alarmSound").play();
-    alert("⏰ Alarm!");
-    localStorage.removeItem("alarmTime");
-    alarmTime = null;
-    document.getElementById("alarmStatus").innerText = "";
-  }
+   let alarmTriggered = false;
+
+     if (timeNow === alarmTime && !alarmTriggered) {
+     alarmTriggered = true;
+     playAlarm();
+     alert("⏰ Alarm!");
+     localStorage.removeItem("alarmTime");
+     alarmTime = null;
+     document.getElementById("alarmStatus").innerText = "";
 }
+
+   function setAlarmSound(key) {
+  localStorage.setItem("alarmSound", key);
+}
+
+   (function loadAlarmSound() {
+  const saved = localStorage.getItem("alarmSound") || "alarm1";
+  const select = document.getElementById("alarmSoundSelect");
+  if (select) select.value = saved;
+})();
+}
+
 
 /* -------------------------
    THEME SYSTEM (5 THEMES)
