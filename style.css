@@ -277,19 +277,52 @@ small {
 ===================== */
 
 #settings {
-  margin-top: 3rem;
-  max-width: 520px;
-  margin-inline: auto;
-  padding: 1.5rem;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.04);
+  margin: 4rem auto 2rem;
+  max-width: 480px;
+  padding: 1.75rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
 }
 
-.setting-group {
+#settings h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.settings-section {
   margin-top: 1.5rem;
 }
 
-.setting-group h4 {
-  margin-bottom: 0.5rem;
-  font-weight: 600;
+.settings-section h4 {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+.setting-row {
+  margin-bottom: 1rem;
+}
+
+.setting-row label {
+  display: block;
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-bottom: 0.35rem;
+}
+
+.setting-row select,
+.setting-row input[type="file"],
+.setting-row input[type="range"] {
+  width: 100%;
+}
+
+.inline {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.inline button {
+  white-space: nowrap;
 }
