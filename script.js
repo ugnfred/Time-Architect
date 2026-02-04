@@ -91,6 +91,9 @@ function updateTime() {
     ? "Daylight Saving Time observed"
     : "No Daylight Saving Time";
 
+  document.getElementById("diffInfo").innerText =
+  `${currentZone} is ${getTimeDifference(zones[currentZone].tz)} from your local time`;
+ 
   document.title = `Current Time in ${currentZone} | Time Architect`;
 
 }
@@ -141,6 +144,26 @@ function getUTCOffset(timeZone) {
   return `UTC ${diff >= 0 ? "+" : ""}${diff}`;
 }
 
+function getTimeDifference(targetTz) {
+  const now = new Date();
+
+  const local = new Date(
+    now.toLocaleString("en-US", { timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone })
+  );
+
+  const target = new Date(
+    now.toLocaleString("en-US", { timeZone: targetTz })
+  );
+
+  let diffMs = target - local;
+  const sign = diffMs >= 0 ? "+" : "-";
+  diffMs = Math.abs(diffMs);
+
+  const hours = Math.floor(diffMs / (1000 * 60 * 60));
+  const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+  return `${sign}${hours}h ${minutes}m`;
+}
 
 /* -------------------------
    LISTEN FOR URL CHANGES
