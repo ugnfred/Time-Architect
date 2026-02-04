@@ -52,6 +52,9 @@ function updateTime() {
   document.getElementById("zoneTitle").innerText =
     `Current Time in ${currentZone}`;
 
+  document.getElementById("zoneInfo").innerText =
+  `${zones[currentZone].label} — ${zones[currentZone].location}`;
+
   document.title = `Current Time in ${currentZone} | Time Architect`;
 }
 
