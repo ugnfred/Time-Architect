@@ -39,6 +39,38 @@ html.theme-graphite {
   --text: #d1d5db;
 }
 
+/* =====================
+   THEME-AWARE DROPDOWN
+===================== */
+
+#themeSelector {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 0.45rem 0.7rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+/* Fix dropdown arrow visibility */
+#themeSelector option {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Focus state */
+#themeSelector:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+/* Better contrast for light theme */
+html.theme-light #themeSelector {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
