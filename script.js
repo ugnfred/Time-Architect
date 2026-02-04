@@ -226,7 +226,7 @@ function checkAlarm() {
   if (timeNow === alarmTime) {
     alarmTriggered = true;
     playAlarm();
-    alert("⏰ Alarm!");
+    showAlarmNotification();
     localStorage.removeItem("alarmTime");
     alarmTime = null;
     document.getElementById("alarmStatus").innerText = "";
@@ -268,6 +268,26 @@ function unlockAudio() {
     .catch(() => {
       console.warn("Audio unlock blocked");
     });
+}
+
+/* Non-Blocking Alarm Notification */
+function showAlarmNotification() {
+  const banner = document.createElement("div");
+  banner.innerText = "⏰ Alarm!";
+  banner.style.position = "fixed";
+  banner.style.top = "20px";
+  banner.style.left = "50%";
+  banner.style.transform = "translateX(-50%)";
+  banner.style.padding = "12px 20px";
+  banner.style.background = "#ff4d4f";
+  banner.style.color = "#fff";
+  banner.style.borderRadius = "8px";
+  banner.style.zIndex = "9999";
+  banner.style.fontWeight = "600";
+
+  document.body.appendChild(banner);
+
+  setTimeout(() => banner.remove(), 4000);
 }
 
 
