@@ -134,8 +134,8 @@ const themes = [
 ];
 
 function setTheme(theme) {
-  document.body.classList.remove(...themes);
-  document.body.classList.add(theme);
+  document.documentElement.classList.remove(...themes);
+  document.documentElement.classList.add(theme);
   localStorage.setItem("theme", theme);
 
   const selector = document.getElementById("themeSelector");
