@@ -78,6 +78,25 @@ function updateTime() {
   `${zones[currentZone].label} — ${zones[currentZone].location}`;
 
   document.title = `Current Time in ${currentZone} | Time Architect`;
+
+   const now = new Date();
+
+document.getElementById("dateInfo").innerText =
+  now.toLocaleDateString("en-US", {
+    timeZone: zones[currentZone].tz,
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  });
+
+document.getElementById("zoneInfo").innerText =
+  `${zones[currentZone].label} — ${zones[currentZone].location} (${getUTCOffset(zones[currentZone].tz)})`;
+
+document.getElementById("dstInfo").innerText =
+  zones[currentZone].observesDST
+    ? "Daylight Saving Time observed"
+    : "No Daylight Saving Time";
 }
 
 /* -------------------------
@@ -114,6 +133,18 @@ function changeZone(zone) {
   window.location.hash = zone;
   updateTime();
 }
+
+/*------------------------
+helper functions:
+-------------------------*/
+function getUTCOffset(timeZone) {
+  const now = new Date();
+  const utc = new Date(now.toLocaleString("en-US", { timeZone: "UTC" }));
+  const local = new Date(now.toLocaleString("en-US", { timeZone }));
+  const diff = (local - utc) / (1000 * 60 * 60);
+  return `UTC ${diff >= 0 ? "+" : ""}${diff}`;
+}
+
 
 /* -------------------------
    LISTEN FOR URL CHANGES
