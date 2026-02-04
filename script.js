@@ -194,6 +194,7 @@ let alarmTriggered = false;
 
 /* Set alarm time */
 function setAlarm() {
+  unlockAudio(); // 🔑 REQUIRED
   const input = document.getElementById("alarmTime").value;
 
   if (!input) {
@@ -247,6 +248,27 @@ function setAlarmSound(key) {
   const select = document.getElementById("alarmSoundSelect");
   if (select) select.value = saved;
 })();
+
+let audioUnlocked = false;
+
+function unlockAudio() {
+  if (audioUnlocked) return;
+
+  const audio = document.getElementById("alarmSound");
+  if (!audio) return;
+
+  audio.src = alarmSounds.alarm1;
+  audio.play()
+    .then(() => {
+      audio.pause();
+      audio.currentTime = 0;
+      audioUnlocked = true;
+      console.log("🔓 Audio unlocked");
+    })
+    .catch(() => {
+      console.warn("Audio unlock blocked");
+    });
+}
 
 
 /* -------------------------
