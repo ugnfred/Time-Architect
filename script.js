@@ -95,7 +95,46 @@ window.addEventListener("hashchange", () => {
 setInterval(() => {
   updateTime();
   updateWorld();
+  checkAlarm();
 }, 1000);
 
 updateTime();
 updateWorld();
+
+/* -------------------------
+   ALARM FEATURE
+-------------------------- */
+let alarmTime = localStorage.getItem("alarmTime");
+
+function setAlarm() {
+  const input = document.getElementById("alarmTime").value;
+
+  if (!input) {
+    alert("Please select a time");
+    return;
+  }
+
+  alarmTime = input;
+  localStorage.setItem("alarmTime", alarmTime);
+
+  document.getElementById("alarmStatus").innerText =
+    `Alarm set for ${alarmTime} (${currentZone})`;
+}
+
+function checkAlarm() {
+  if (!alarmTime) return;
+
+  const now = new Date();
+  const timeNow = now.toLocaleTimeString("en-US", {
+    timeZone: zones[currentZone],
+    hour12: false
+  }).slice(0, 5);
+
+  if (timeNow === alarmTime) {
+    document.getElementById("alarmSound").play();
+    alert("⏰ Alarm!");
+    localStorage.removeItem("alarmTime");
+    alarmTime = null;
+    document.getElementById("alarmStatus").innerText = "";
+  }
+}
