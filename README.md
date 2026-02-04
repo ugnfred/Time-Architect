@@ -1,2 +1,2 @@
 # Time-Architect
-Time hub
+Time hub helps you keep track of time of different Time zones
