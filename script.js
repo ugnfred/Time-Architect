@@ -210,9 +210,10 @@ function checkAlarm() {
 
   const now = new Date();
   const timeNow = now.toLocaleTimeString("en-US", {
-    timeZone: zones[currentZone],
-    hour12: false
-  }).slice(0, 5);
+  timeZone: zones[currentZone].tz,
+  hour12: false
+}).slice(0, 5);
+ 
 
   if (timeNow === alarmTime) {
     document.getElementById("alarmSound").play();
