@@ -118,7 +118,7 @@ header h1 {
 }
 
 #world div {
-  padding: 0.8rem 1rem;
+  padding: 0.6rem 0.8rem;
   border-radius: 10px;
   min-width: 120px;
   transition: transform 0.2s ease, background 0.2s ease;
@@ -133,6 +133,7 @@ section h3 {
   margin-top: 3rem;
   margin-bottom: 1rem;
   font-size: 1.1rem;
+  opacity: 0.85;
 }
 
 input[type="time"] {
