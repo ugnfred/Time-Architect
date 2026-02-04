@@ -28,7 +28,14 @@
 <body>
   <header>
     <h1>🕒 Time Architect</h1>
-    <button onclick="toggleTheme()">🌗</button>
+    <select id="themeSelector" onchange="setTheme(this.value)">
+      <option value="theme-light">☀️ Light</option>
+      <option value="theme-dark">🌙 Dark</option>
+      <option value="theme-midnight">🌌 Midnight</option>
+      <option value="theme-solar">🌅 Solar</option>
+      <option value="theme-graphite">🧠 Graphite</option>
+    </select>
+
   </header>
 
   <main>
