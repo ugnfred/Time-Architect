@@ -1,10 +1,31 @@
 const zones = {
-  EST: "America/New_York",
-  IST: "Asia/Kolkata",
-  GMT: "Europe/London",
-  PST: "America/Los_Angeles",
-  JST: "Asia/Tokyo"
+  EST: {
+    tz: "America/New_York",
+    label: "Eastern Standard Time",
+    location: "New York, USA"
+  },
+  IST: {
+    tz: "Asia/Kolkata",
+    label: "India Standard Time",
+    location: "India"
+  },
+  GMT: {
+    tz: "Europe/London",
+    label: "Greenwich Mean Time",
+    location: "London, UK"
+  },
+  PST: {
+    tz: "America/Los_Angeles",
+    label: "Pacific Standard Time",
+    location: "California, USA"
+  },
+  JST: {
+    tz: "Asia/Tokyo",
+    label: "Japan Standard Time",
+    location: "Tokyo, Japan"
+  }
 };
+
 
 /* -------------------------
    ROUTING (HASH-BASED)
@@ -24,7 +45,7 @@ function updateTime() {
 
   document.getElementById("clock").innerText =
     now.toLocaleTimeString("en-US", {
-      timeZone: zones[currentZone],
+      timeZone: zones[currentZone].tz,
       hour12: false
     });
 
@@ -44,14 +65,20 @@ function updateWorld() {
 
   for (let z in zones) {
     const t = now.toLocaleTimeString("en-US", {
-      timeZone: zones[z],
+      timeZone: zones[z].tz,
       hour12: false
     });
 
     el.innerHTML += `
-      <div style="cursor:pointer"
-           onclick="changeZone('${z}')">
-        <strong>${z}</strong><br>${t}
+      <div
+        onclick="changeZone('${z}')"
+        title="${zones[z].label} — ${zones[z].location}"
+      >
+        <strong>${z}</strong><br>
+        ${t}<br>
+        <small style="opacity:0.75">
+          ${zones[z].location}
+        </small>
       </div>
     `;
   }
