@@ -404,3 +404,22 @@ function playAlarm() {
   audio.play();
 }
 
+/* -------------------------
+   Modal Open / Close logic
+-------------------------- */
+
+function openSettings() {
+  document.getElementById("settingsModal").classList.remove("hidden");
+}
+
+function closeSettings() {
+  document.getElementById("settingsModal").classList.add("hidden");
+}
+
+// Optional: ESC to close
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeSettings();
+  }
+});
+
