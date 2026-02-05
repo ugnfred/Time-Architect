@@ -33,6 +33,10 @@
 
 <body>
   <header>
+    <button id="openSettingsBtn" onclick="openSettings()">
+      ⚙️ Settings
+    </button>
+
     <h1>🕒 Time Architect</h1>
     <select id="themeSelector" onchange="setTheme(this.value)">
       <option value="theme-light">☀️ Light</option>
@@ -154,6 +158,35 @@
     </div>
   </div>
 </section>
+
+    
+    <!-- MODAL STRUCTURE -->
+    
+    <div id="settingsModal" class="modal hidden">
+  <div class="modal-backdrop" onclick="closeSettings()"></div>
+
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>⚙️ Settings</h3>
+      <button onclick="closeSettings()">✕</button>
+    </div>
+
+    <!-- 🔔 Alarm Settings -->
+    <div class="settings-section">
+      <h4>🔔 Alarm</h4>
+
+      <!-- MOVE your existing alarm settings here later -->
+    </div>
+
+    <!-- 🎨 Background Settings -->
+    <div class="settings-section">
+      <h4>🎨 Background</h4>
+
+      <!-- MOVE your existing background settings here later -->
+    </div>
+  </div>
+</div>
+
     
 </body>
 </html>
