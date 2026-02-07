@@ -468,6 +468,11 @@ function previewAlarm() {
   previewAudio = new Audio(alarmSounds[soundKey]);
   previewAudio.volume = volume;
   previewAudio.play();
+
+  // ⏱ auto-stop preview after 2.5 seconds
+  setTimeout(() => {
+    stopPreview();
+  }, 2500);
 }
 
 function stopPreview() {
