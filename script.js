@@ -405,21 +405,28 @@ function playAlarm() {
 }
 
 /* -------------------------
-   Modal Open / Close logic
+   Settings Modal
 -------------------------- */
-
 function openSettings() {
-  document.getElementById("settingsModal").classList.remove("hidden");
+  const overlay = document.getElementById("settingsOverlay");
+  if (!overlay) {
+    console.error("settingsOverlay not found");
+    return;
+  }
+  overlay.classList.remove("hidden");
 }
 
 function closeSettings() {
-  document.getElementById("settingsModal").classList.add("hidden");
+  const overlay = document.getElementById("settingsOverlay");
+  if (!overlay) return;
+  overlay.classList.add("hidden");
 }
 
-// Optional: ESC to close
+/* ESC closes settings */
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     closeSettings();
   }
 });
+
 
