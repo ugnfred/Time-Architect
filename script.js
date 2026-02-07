@@ -15,6 +15,9 @@ function disablePro() {
   location.reload();
 }
 
+/* =========================
+   TIME ZONES
+========================= */
 const zones = {
   EST: {
     tz: "America/New_York",
@@ -47,7 +50,6 @@ const zones = {
     observesDST: false
   }
 };
-
 
 /* -------------------------
    ROUTING (HASH-BASED)
