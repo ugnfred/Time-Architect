@@ -404,6 +404,7 @@ small {
 .settings-header h2 {
   font-size: 1.25rem;
   font-weight: 600;
+  color: var(--text); 
 }
 
 .close-btn {
@@ -418,7 +419,7 @@ small {
 .settings-section h3 {
   font-size: 0.95rem;
   margin-bottom: 12px;
-  color: #c7d2fe;
+  color: var(--text);
 }
 
 .field {
