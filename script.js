@@ -189,6 +189,7 @@ setInterval(() => {
    ALARM FEATURE
 -------------------------- */
 
+
 let alarmTime = localStorage.getItem("alarmTime");
 let alarmTriggered = false;
 
@@ -387,6 +388,15 @@ function uploadBackground(event) {
   }
 })();
 
+/* -------------------------
+   Alarm Settings configuration   
+-------------------------- */
+let settings = {
+  alarmSound: localStorage.getItem("alarmSound") || "alarm1",
+  alarmVolume: parseFloat(localStorage.getItem("alarmVolume") || "0.7"),
+  stopKey: localStorage.getItem("stopKey") || "Space"
+};
+
 const alarmSounds = {
   alarm1: "https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg",
   alarm2: "https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg",
@@ -394,11 +404,11 @@ const alarmSounds = {
 };
 
 function playAlarm() {
-  const key = localStorage.getItem("alarmSound") || "alarm1";
-  const volume = parseFloat(localStorage.getItem("alarmVolume") || "0.7");
+  const soundKey = settings.alarmSound;
+  const volume = settings.alarmVolume;
 
-  if (!alarmSounds[key]) {
-    console.warn("Invalid alarm sound key:", key);
+  if (!alarmSounds[soundKey]) {
+    console.warn("Invalid alarm sound:", soundKey);
     return;
   }
 
@@ -406,18 +416,16 @@ function playAlarm() {
     alarmAudio.pause();
   }
 
-  alarmAudio = new Audio(alarmSounds[key]);
+  alarmAudio = new Audio(alarmSounds[soundKey]);
   alarmAudio.loop = true;
   alarmAudio.volume = volume;
 
   alarmAudio.play()
     .then(() => {
       alarmRinging = true;
-      console.log("🔔 Alarm ringing");
+      console.log("🔔 Alarm ringing", { soundKey, volume });
     })
-    .catch(err => {
-      console.error("Alarm play blocked:", err);
-    });
+    .catch(err => console.error("Alarm blocked:", err));
 }
 
 function stopAlarm() {
@@ -461,17 +469,30 @@ if (stopKeySelect) {
 document.addEventListener("keydown", (e) => {
   if (!alarmRinging) return;
 
-  const stopKey = localStorage.getItem("stopKey") || "Space";
+  const stopKey = settings.stopKey;
 
-  if (e.code === stopKey || e.key === stopKey) {
+  // Normalize keys
+  if (
+    (stopKey === "Space" && e.code === "Space") ||
+    (stopKey === "Enter" && e.code === "Enter") ||
+    (stopKey === "Escape" && e.code === "Escape")
+  ) {
     stopAlarm();
   }
 });
+
 
 /* -------------------------
    Settings Modal
 -------------------------- */
 function openSettings() {
+   document.getElementById("settingsOverlay").classList.remove("hidden");
+
+  // Load current settings into UI
+  document.getElementById("alarmSoundSelect").value = settings.alarmSound;
+  document.getElementById("alarmVolume").value = settings.alarmVolume;
+  document.getElementById("stopKey").value = settings.stopKey;
+   
   const overlay = document.getElementById("settingsOverlay");
   if (!overlay) {
     console.error("settingsOverlay not found");
@@ -484,6 +505,20 @@ function closeSettings() {
   const overlay = document.getElementById("settingsOverlay");
   if (!overlay) return;
   overlay.classList.add("hidden");
+}
+
+function saveSettings() {
+  settings.alarmSound = document.getElementById("alarmSoundSelect").value;
+  settings.alarmVolume = parseFloat(document.getElementById("alarmVolume").value);
+  settings.stopKey = document.getElementById("stopKey").value;
+
+  localStorage.setItem("alarmSound", settings.alarmSound);
+  localStorage.setItem("alarmVolume", settings.alarmVolume);
+  localStorage.setItem("stopKey", settings.stopKey);
+
+  console.log("✅ Settings saved", settings);
+
+  closeSettings();
 }
 
 /* ESC closes settings */
