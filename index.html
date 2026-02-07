@@ -98,68 +98,6 @@
       </p>
     </section>
 
-<section id="settings">
-  <h3>⚙️ Settings</h3>
-
-  <div class="settings-section">
-    <h4>🔔 Alarm</h4>
-
-    <div class="setting-row">
-      <label>Alarm Sound</label>
-      <div class="inline">
-        <select id="alarmSoundSelect" onchange="setAlarmSound(this.value)">
-          <option value="alarm1">Classic</option>
-          <option value="alarm2">Soft Bell</option>
-          <option value="alarm3">Digital</option>
-        </select>
-        <button onclick="previewAlarm()">Preview</button>
-      </div>
-    </div>
-
-    <div class="setting-row">
-      <label>Volume</label>
-      <input
-        type="range"
-        min="0"
-        max="1"
-        step="0.05"
-        id="alarmVolume"
-        onchange="setAlarmVolume(this.value)"
-      />
-    </div>
-
-    <div class="setting-row">
-      <label>Stop alarm using</label>
-      <select id="stopKeySelect" onchange="setStopKey(this.value)">
-        <option value="Space">Spacebar</option>
-        <option value="Enter">Enter</option>
-        <option value="Escape">Escape</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="settings-section">
-    <h4>🎨 Background</h4>
-
-    <div class="setting-row">
-      <label>Background</label>
-      <select onchange="setBackground(this.value)">
-        <option value="none">Default</option>
-        <option value="bg1">Mountains</option>
-        <option value="bg2">City Night</option>
-        <option value="bg3">Abstract</option>
-        <option value="random">Random</option>
-      </select>
-    </div>
-
-    <div class="setting-row">
-      <label>Custom Image</label>
-      <input type="file" accept="image/*" onchange="uploadBackground(event)" />
-    </div>
-  </div>
-</section>
-
-       
 <!-- Settings Modal -->
 <div id="settingsOverlay" class="overlay hidden">
   <div class="settings-modal">
@@ -227,7 +165,8 @@
 
   </div>
 </div>
-
+    
+</section>
     
 </body>
 </html>
