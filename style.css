@@ -434,3 +434,88 @@ small {
   margin: 18px 0;
 }
 
+/* =====================
+   ALARM OVERLAY
+===================== */
+
+.alarm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.alarm-overlay.hidden {
+  display: none;
+}
+
+.alarm-card {
+  width: 90%;
+  max-width: 420px;
+  background: color-mix(in srgb, var(--bg) 85%, #000 15%);
+  color: var(--text);
+  border-radius: 18px;
+  padding: 28px 24px;
+  text-align: center;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+}
+
+.alarm-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.alarm-time {
+  font-size: 3rem;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.12em;
+  margin-bottom: 6px;
+}
+
+.alarm-zone {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-bottom: 22px;
+}
+
+.alarm-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.snooze-btn {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.snooze-btn.pro {
+  opacity: 0.6;
+}
+
+.stop-btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  background: #ef4444;
+  color: #fff;
+  cursor: pointer;
+}
+
+.alarm-hint {
+  margin-top: 14px;
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
