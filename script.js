@@ -227,12 +227,69 @@ function checkAlarm() {
   if (timeNow === alarmTime) {
     alarmTriggered = true;
     playAlarm();
-    showAlarmNotification();
+    showAlarmOverlay();
     localStorage.removeItem("alarmTime");
     alarmTime = null;
     document.getElementById("alarmStatus").innerText = "";
   }
 }
+
+/* -------------------------
+  Overlay helper functions
+-------------------------- */
+function showAlarmOverlay() {
+  const overlay = document.getElementById("alarmOverlay");
+  overlay.classList.remove("hidden");
+
+  document.getElementById("alarmOverlayTime").innerText =
+    new Date().toLocaleTimeString("en-US", {
+      timeZone: zones[currentZone].tz,
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false
+    });
+
+  document.getElementById("alarmOverlayZone").innerText =
+    `${zones[currentZone].label} (${getUTCOffset(zones[currentZone].tz)})`;
+
+  updateAlarmKeyHint();
+}
+
+function hideAlarmOverlay() {
+  document.getElementById("alarmOverlay").classList.add("hidden");
+}
+
+function stopAlarmFromUI() {
+  stopAlarm();
+  hideAlarmOverlay();
+}
+
+function snoozeAlarm(minutes) {
+  stopAlarm();
+  hideAlarmOverlay();
+
+  const now = new Date();
+  now.setMinutes(now.getMinutes() + minutes);
+
+  alarmTime = now
+    .toLocaleTimeString("en-US", {
+      timeZone: zones[currentZone].tz,
+      hour12: false
+    })
+    .slice(0, 5);
+
+  localStorage.setItem("alarmTime", alarmTime);
+
+  document.getElementById("alarmStatus").innerText =
+    `Snoozed for ${minutes} min (until ${alarmTime})`;
+}
+
+function updateAlarmKeyHint() {
+  const key = localStorage.getItem("stopKey") || "Space";
+  document.getElementById("alarmKeyHint").innerText =
+    `Press ${key} to stop`;
+}
+
 
 /* -------------------------
    ALARM SOUND SELECTION
@@ -488,17 +545,18 @@ document.getElementById("alarmVolume")?.addEventListener("input", stopPreview);
 document.addEventListener("keydown", (e) => {
   if (!alarmRinging) return;
 
-  const stopKey = settings.stopKey;
+  const stopKey = localStorage.getItem("stopKey") || "Space";
 
-  // Normalize keys
   if (
     (stopKey === "Space" && e.code === "Space") ||
     (stopKey === "Enter" && e.code === "Enter") ||
     (stopKey === "Escape" && e.code === "Escape")
   ) {
     stopAlarm();
+    hideAlarmOverlay();
   }
 });
+
 
 
 /* -------------------------
