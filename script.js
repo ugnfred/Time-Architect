@@ -182,9 +182,6 @@ setInterval(() => {
   checkAlarm();
 }, 1000);
 
-updateTime();
-updateWorld();
-
 /* -------------------------
    ALARM FEATURE
 -------------------------- */
@@ -420,6 +417,16 @@ function playAlarm() {
     .catch(err => {
       console.error("Alarm play blocked:", err);
     });
+}
+
+function stopAlarm() {
+  if (!alarmAudio) return;
+
+  alarmAudio.pause();
+  alarmAudio.currentTime = 0;
+  alarmRinging = false;
+
+  console.log("🛑 Alarm stopped");
 }
 
 /* -------------------------
