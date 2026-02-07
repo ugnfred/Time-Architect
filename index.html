@@ -31,6 +31,32 @@
 
 </head>
 
+<!-- Alarm Overlay -->
+<div id="alarmOverlay" class="alarm-overlay hidden">
+  <div class="alarm-card">
+
+    <div class="alarm-title">⏰ Alarm Ringing</div>
+
+    <div class="alarm-time" id="alarmOverlayTime">07:30</div>
+    <div class="alarm-zone" id="alarmOverlayZone">
+      India Standard Time (UTC+5:30)
+    </div>
+
+    <div class="alarm-actions">
+      <button class="snooze-btn" onclick="snoozeAlarm(5)">Snooze 5 min</button>
+      <button class="snooze-btn" onclick="snoozeAlarm(10)">Snooze 10 min</button>
+      <button class="snooze-btn pro" onclick="snoozeAlarm(15)">Snooze 15 min</button>
+    </div>
+
+    <button class="stop-btn" onclick="stopAlarmFromUI()">Stop Alarm</button>
+
+    <div class="alarm-hint" id="alarmKeyHint">
+      Press Space to stop
+    </div>
+
+  </div>
+</div>
+  
 <body>
   <header>
     <button id="openSettingsBtn" onclick="openSettings()">
