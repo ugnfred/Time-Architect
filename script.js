@@ -447,6 +447,26 @@ function previewAlarm() {
   setTimeout(stopAlarm, 3000);
 }
 
+const stopKeySelect = document.getElementById("stopKey");
+
+if (stopKeySelect) {
+  stopKeySelect.value = localStorage.getItem("stopKey") || "Space";
+
+  stopKeySelect.addEventListener("change", () => {
+    localStorage.setItem("stopKey", stopKeySelect.value);
+  });
+}
+
+document.addEventListener("keydown", (e) => {
+  if (!alarmRinging) return;
+
+  const stopKey = localStorage.getItem("stopKey") || "Space";
+
+  if (e.code === stopKey || e.key === stopKey) {
+    stopAlarm();
+  }
+});
+
 
 /* -------------------------
    Settings Modal
