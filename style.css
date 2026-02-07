@@ -377,3 +377,94 @@ small {
   margin-top: 1.5rem;
 }
 
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Modal */
+.settings-modal {
+  width: 420px;
+  max-width: 90%;
+  background: rgba(20, 28, 45, 0.9);
+  border-radius: 16px;
+  padding: 24px;
+  color: #e5e7eb;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+/* Header */
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.settings-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #9ca3af;
+  cursor: pointer;
+}
+
+/* Sections */
+.settings-section h3 {
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  color: #c7d2fe;
+}
+
+.field {
+  margin-bottom: 14px;
+}
+
+.field label {
+  display: block;
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin-bottom: 6px;
+}
+
+.field select,
+.field input[type="range"],
+.field input[type="file"] {
+  width: 100%;
+}
+
+.inline {
+  display: flex;
+  gap: 8px;
+}
+
+.inline button {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Divider */
+.divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 18px 0;
+}
+
