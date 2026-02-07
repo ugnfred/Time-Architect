@@ -451,20 +451,34 @@ if (volumeSlider) {
   });
 }
 
+/* -------------------------
+   Alarm Preview  
+-------------------------- */
+
+let previewAudio = null;
+
 function previewAlarm() {
-  playAlarm();
-  setTimeout(stopAlarm, 3000);
+  stopPreview();
+
+  const soundKey = document.getElementById("alarmSoundSelect").value;
+  const volume = parseFloat(document.getElementById("alarmVolume").value);
+
+  if (!alarmSounds[soundKey]) return;
+
+  previewAudio = new Audio(alarmSounds[soundKey]);
+  previewAudio.volume = volume;
+  previewAudio.play();
 }
 
-const stopKeySelect = document.getElementById("stopKey");
-
-if (stopKeySelect) {
-  stopKeySelect.value = localStorage.getItem("stopKey") || "Space";
-
-  stopKeySelect.addEventListener("change", () => {
-    localStorage.setItem("stopKey", stopKeySelect.value);
-  });
+function stopPreview() {
+  if (!previewAudio) return;
+  previewAudio.pause();
+  previewAudio.currentTime = 0;
+  previewAudio = null;
 }
+
+document.getElementById("alarmSoundSelect")?.addEventListener("change", stopPreview);
+document.getElementById("alarmVolume")?.addEventListener("input", stopPreview);
 
 document.addEventListener("keydown", (e) => {
   if (!alarmRinging) return;
@@ -516,9 +530,26 @@ function saveSettings() {
   localStorage.setItem("alarmVolume", settings.alarmVolume);
   localStorage.setItem("stopKey", settings.stopKey);
 
-  console.log("✅ Settings saved", settings);
+  showSettingsStatus("✅ Settings saved");
+}
 
-  closeSettings();
+function showSettingsStatus(message) {
+  let status = document.getElementById("settingsStatus");
+
+  if (!status) {
+    status = document.createElement("div");
+    status.id = "settingsStatus";
+    status.style.marginTop = "12px";
+    status.style.fontSize = "0.85rem";
+    status.style.opacity = "0.85";
+    document.querySelector(".settings-modal").appendChild(status);
+  }
+
+  status.innerText = message;
+
+  setTimeout(() => {
+    status.innerText = "";
+  }, 2000);
 }
 
 /* ESC closes settings */
