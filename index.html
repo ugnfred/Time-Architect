@@ -159,31 +159,72 @@
   </div>
 </section>
 
-    
-    <!-- MODAL STRUCTURE -->
-    
-    <div id="settingsModal" class="modal hidden">
-  <div class="modal-backdrop" onclick="closeSettings()"></div>
+       
+<!-- Settings Modal -->
+<div id="settingsOverlay" class="overlay hidden">
+  <div class="settings-modal">
 
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3>⚙️ Settings</h3>
-      <button onclick="closeSettings()">✕</button>
+    <!-- Header -->
+    <div class="settings-header">
+      <h2>⚙️ Settings</h2>
+      <button class="close-btn" onclick="closeSettings()">✕</button>
     </div>
 
-    <!-- 🔔 Alarm Settings -->
+    <!-- Section: Alarm -->
     <div class="settings-section">
-      <h4>🔔 Alarm</h4>
+      <h3>🔔 Alarm</h3>
 
-      <!-- MOVE your existing alarm settings here later -->
+      <div class="field">
+        <label>Alarm sound</label>
+        <div class="inline">
+          <select id="alarmSoundSelect" onchange="setAlarmSound(this.value)">
+            <option value="alarm1">Classic</option>
+            <option value="alarm2">Soft Bell</option>
+            <option value="alarm3">Digital</option>
+          </select>
+          <button onclick="previewAlarm()">▶ Preview</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Volume</label>
+        <input type="range" min="0" max="1" step="0.01" id="alarmVolume">
+      </div>
+
+      <div class="field">
+        <label>Stop alarm using</label>
+        <select id="stopKey">
+          <option value="Space">Spacebar</option>
+          <option value="Enter">Enter</option>
+          <option value="Escape">Escape</option>
+        </select>
+      </div>
     </div>
 
-    <!-- 🎨 Background Settings -->
+    <!-- Divider -->
+    <div class="divider"></div>
+
+    <!-- Section: Background -->
     <div class="settings-section">
-      <h4>🎨 Background</h4>
+      <h3>🖼 Background</h3>
 
-      <!-- MOVE your existing background settings here later -->
+      <div class="field">
+        <label>Background</label>
+        <select onchange="setBackground(this.value)">
+          <option value="none">Default</option>
+          <option value="bg1">Mountains</option>
+          <option value="bg2">Forest</option>
+          <option value="bg3">Lake</option>
+          <option value="random">Random</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Custom image</label>
+        <input type="file" accept="image/*" onchange="uploadBackground(event)">
+      </div>
     </div>
+
   </div>
 </div>
 
