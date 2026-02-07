@@ -236,6 +236,8 @@ function checkAlarm() {
 /* -------------------------
    ALARM SOUND SELECTION
 -------------------------- */
+let alarmAudio = null;
+let alarmRinging = false;
 
 /* Save selected alarm sound */
 function setAlarmSound(key) {
@@ -395,13 +397,29 @@ const alarmSounds = {
 
 function playAlarm() {
   const key = localStorage.getItem("alarmSound") || "alarm1";
-  const audio = document.getElementById("alarmSound");
-  if (!audio) {
-    console.error("Alarm audio element not found");
+  const volume = parseFloat(localStorage.getItem("alarmVolume") || "0.7");
+
+  if (!alarmSounds[key]) {
+    console.warn("Invalid alarm sound key:", key);
     return;
   }
-  audio.src = alarmSounds[key];
-  audio.play();
+
+  if (alarmAudio) {
+    alarmAudio.pause();
+  }
+
+  alarmAudio = new Audio(alarmSounds[key]);
+  alarmAudio.loop = true;
+  alarmAudio.volume = volume;
+
+  alarmAudio.play()
+    .then(() => {
+      alarmRinging = true;
+      console.log("🔔 Alarm ringing");
+    })
+    .catch(err => {
+      console.error("Alarm play blocked:", err);
+    });
 }
 
 /* -------------------------
