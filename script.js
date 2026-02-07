@@ -429,6 +429,25 @@ function stopAlarm() {
   console.log("🛑 Alarm stopped");
 }
 
+const volumeSlider = document.getElementById("alarmVolume");
+
+if (volumeSlider) {
+  volumeSlider.value = localStorage.getItem("alarmVolume") || "0.7";
+
+  volumeSlider.addEventListener("input", () => {
+    localStorage.setItem("alarmVolume", volumeSlider.value);
+    if (alarmAudio) {
+      alarmAudio.volume = parseFloat(volumeSlider.value);
+    }
+  });
+}
+
+function previewAlarm() {
+  playAlarm();
+  setTimeout(stopAlarm, 3000);
+}
+
+
 /* -------------------------
    Settings Modal
 -------------------------- */
