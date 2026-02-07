@@ -323,30 +323,6 @@ small {
   display: none;
 }
 
-.modal {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-}
-
-.modal-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-}
-
-.modal-content {
-  position: relative;
-  max-width: 500px;
-  margin: 10vh auto;
-  padding: 1.5rem;
-  border-radius: 16px;
-  background: rgba(20, 25, 35, 0.85);
-  backdrop-filter: blur(14px);
-  box-shadow: 0 30px 60px rgba(0,0,0,0.35);
-  color: #fff;
-}
-
 .modal-header {
   display: flex;
   justify-content: space-between;
